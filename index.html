@@ -1,1 +1,469 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weddinbox - אירועי יוקרה | החלום שלכם, כל השאר עלינו</title>
+    <meta name="description" content="Weddinbox - מובילים בהפקת אירועי יוקרה בישראל. תופרים לכם את האירוע המושלם עם פרטי עיצוב יוקרתיים ושירות מקצועי ללא פשרות.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --light-gold: #F4E4BC;
+            --charcoal: #1A1A1A;
+            --deep-black: #0D0D0D;
+            --warm-white: #FAFAFA;
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 100%);
+            --gradient-dark: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+        }
 
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--deep-black);
+            color: var(--warm-white);
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Hero Background with Parallax */
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(13, 13, 13, 0.4), rgba(26, 26, 26, 0.6)), 
+                        url('https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080') center/cover fixed;
+            background-attachment: fixed;
+        }
+
+        /* Floating Navigation */
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 50px;
+            padding: 10px 20px;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .floating-nav:hover {
+            background: rgba(13, 13, 13, 0.95);
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Animated Text */
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 8rem);
+            line-height: 0.9;
+            background: var(--gradient-gold);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+        }
+
+        .hero-cta {
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+        }
+
+        /* Glowing Button */
+        .glow-button {
+            background: var(--gradient-gold);
+            color: var(--deep-black);
+            font-weight: 700;
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .glow-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 50px rgba(212, 175, 55, 0.4);
+        }
+
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .glow-button:hover::before {
+            left: 100%;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { animation-delay: 0s; }
+        .floating-element:nth-child(2) { animation-delay: 2s; }
+        .floating-element:nth-child(3) { animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Services Preview Section */
+        .services-preview {
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-gold);
+        }
+
+        .service-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Statistics Counter */
+        .stats-section {
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--deep-black) 0%, var(--charcoal) 50%, var(--deep-black) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .floating-nav {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                border-radius: 0;
+                background: var(--deep-black);
+            }
+            
+            .hero-section {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <div class="flex items-center space-x-8 space-x-reverse">
+            <a href="index.html" class="text-2xl font-serif font-bold text-white">Weddinbox</a>
+            <div class="hidden md:flex items-center space-x-6 space-x-reverse">
+                <a href="about.html" class="text-white hover:text-yellow-300 transition-colors font-inter font-medium">אודות</a>
+                <a href="packages.html" class="text-white hover:text-yellow-300 transition-colors font-inter font-medium">חבילות</a>
+                <a href="gallery.html" class="text-white hover:text-yellow-300 transition-colors font-inter font-medium">גלריה</a>
+                <a href="process.html" class="text-white hover:text-yellow-300 transition-colors font-inter font-medium">התהליך</a>
+                <a href="testimonials.html" class="text-white hover:text-yellow-300 transition-colors font-inter font-medium">ממליצים</a>
+                <a href="contact.html" class="glow-button text-sm">תיאום פגישה</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <!-- Floating Elements -->
+        <div class="floating-element top-20 right-20 w-4 h-4 bg-yellow-300 rounded-full opacity-60"></div>
+        <div class="floating-element top-40 left-32 w-6 h-6 bg-yellow-400 rounded-full opacity-40"></div>
+        <div class="floating-element bottom-32 right-40 w-3 h-3 bg-yellow-200 rounded-full opacity-50"></div>
+
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="hero-title font-serif font-black mb-8">
+                החלום שלכם.<br>
+                כל השאר עלינו.
+            </h1>
+            <p class="hero-subtitle text-2xl md:text-3xl lg:text-4xl font-inter font-light mb-12 text-gray-200 max-w-4xl mx-auto leading-relaxed">
+                תופרים לכם את האירוע המושלם<br>
+                <span class="text-yellow-300 font-medium">עם פרטי עיצוב יוקרתיים ושירות ללא פשרות</span>
+            </p>
+            <div class="hero-cta">
+                <a href="contact.html" class="glow-button inline-block text-xl font-inter">
+                    בואו נתחיל לתכנן
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="services-preview py-32">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">השירותים שלנו</h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    מתכננים, מעצבים ומפיקים אירועים יוקרתיים ברמה הגבוהה ביותר
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-6xl mb-6">💎</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">עיצוב יוקרתי</h3>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        עיצוב קונספט מלא ומותאם אישית, עם פרטים יוקרתיים ששמים דגש על כל הפרטים הקטנים
+                    </p>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-6xl mb-6">🎭</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">הפקה מלאה</h3>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        ניהול מקצועי וליווי מלא מהשלב הראשון ועד סוף האירוע - אתם פשוט נהנים
+                    </p>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-6xl mb-6">✨</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">חוויה בלתי נשכחת</h3>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        יוצרים רגעים קסומים שיישארו בזיכרון לכל החיים - של כל האורחים
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-number font-serif">500+</div>
+                    <p class="text-gray-300 font-inter font-medium">אירועים מוצלחים</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-number font-serif">98%</div>
+                    <p class="text-gray-300 font-inter font-medium">שביעות רצון</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-number font-serif">10+</div>
+                    <p class="text-gray-300 font-inter font-medium">שנות ניסיון</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="400">
+                    <div class="stat-number font-serif">24/7</div>
+                    <p class="text-gray-300 font-inter font-medium">זמינות</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-32 relative">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-8">
+                    מוכנים להגשים את החלום?
+                </h2>
+                <p class="text-2xl text-gray-300 font-inter mb-12 max-w-3xl mx-auto">
+                    בואו נפגש לשיחת השראה ונתחיל לתכנן את האירוע המושלם שלכם
+                </p>
+                <a href="contact.html" class="glow-button inline-block text-xl font-inter">
+                    לתיאום פגישה ללא התחייבות
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">Weddinbox</h3>
+                    <p class="text-gray-400 font-inter leading-relaxed">
+                        תופרים חלומות, יוצרים חוויות בלתי נשכחות. <br>
+                        המומחים בהפקת אירועי יוקרה בישראל.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-white mb-4">קישורים מהירים</h4>
+                    <ul class="space-y-2 text-gray-400 font-inter">
+                        <li><a href="about.html" class="hover:text-yellow-300 transition-colors">אודות</a></li>
+                        <li><a href="packages.html" class="hover:text-yellow-300 transition-colors">חבילות</a></li>
+                        <li><a href="gallery.html" class="hover:text-yellow-300 transition-colors">גלריה</a></li>
+                        <li><a href="process.html" class="hover:text-yellow-300 transition-colors">התהליך</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-white mb-4">יצירת קשר</h4>
+                    <ul class="space-y-2 text-gray-400 font-inter">
+                        <li>📞 050-123-4567</li>
+                        <li>📧 info@weddinbox.co.il</li>
+                        <li>📍 תל אביב, ישראל</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 font-inter">
+                <p>&copy; 2025 Weddinbox. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
