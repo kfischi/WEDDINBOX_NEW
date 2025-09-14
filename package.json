@@ -1,1 +1,36 @@
-
+{
+  "name": "weddinbox-website",
+  "version": "1.0.0",
+  "description": "אתר מתקדם לחברת הפקת אירועי יוקרה עם אנימציות מתקדמות ועיצוב יוקרתי",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "echo 'Static site ready'",
+    "test": "echo 'No tests specified'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kfischi/WEDDINBOX_NEW.git"
+  },
+  "keywords": [
+    "wedding",
+    "events",
+    "luxury",
+    "website",
+    "responsive",
+    "animations",
+    "html5",
+    "css3",
+    "javascript",
+    "hebrew",
+    "rtl"
+  ],
+  "author": {
+    "name": "Weddinbox Team",
+    "email": "info@weddinbox.co.il"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
