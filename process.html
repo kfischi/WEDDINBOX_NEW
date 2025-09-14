@@ -1,1 +1,943 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>התהליך שלנו | Weddinbox - 4 שלבים פשוטים לאירוע מושלם</title>
+    <meta name="description" content="הכירו את התהליך המקצועי של Weddinbox - 4 שלבים מתוחכמים שהופכים את החלום שלכם לאירוع מושלם. מייעוץ ראשוני ועד ביצוע מושלם.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --light-gold: #F4E4BC;
+            --charcoal: #1A1A1A;
+            --deep-black: #0D0D0D;
+            --warm-white: #FAFAFA;
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 100%);
+            --gradient-dark: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+        }
 
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--deep-black);
+            color: var(--warm-white);
+            overflow-x: hidden;
+        }
+
+        .font-serif { font-family: 'Frank Ruhl Libre', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+
+        /* Process Hero */
+        .process-hero {
+            background: linear-gradient(rgba(13, 13, 13, 0.6), rgba(26, 26, 26, 0.7)), 
+                        url('https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080') center/cover;
+            background-attachment: fixed;
+            min-height: 70vh;
+            position: relative;
+        }
+
+        /* Step Cards */
+        .step-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            min-height: 400px;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 25px 80px rgba(212, 175, 55, 0.2);
+        }
+
+        .step-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--deep-black);
+            margin-bottom: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover .step-number {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-gold), transparent, var(--light-gold)) border-box;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: subtract;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-card:hover .step-number::after {
+            opacity: 1;
+        }
+
+        /* Process Flow Connector */
+        .process-connector {
+            position: absolute;
+            top: 50%;
+            right: -50px;
+            width: 100px;
+            height: 2px;
+            background: var(--gradient-gold);
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+
+        .process-connector::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: -10px;
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Interactive Timeline */
+        .interactive-timeline {
+            position: relative;
+            padding: 4rem 0;
+            background: var(--gradient-dark);
+        }
+
+        .timeline-track {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            height: 100%;
+            background: var(--gradient-gold);
+            width: 0%;
+            transition: width 0.8s ease;
+            border-radius: 2px;
+        }
+
+        .timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: -2rem;
+        }
+
+        .timeline-step {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 26, 26, 0.9);
+            border: 3px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .timeline-step.active {
+            background: var(--gradient-gold);
+            color: var(--deep-black);
+            border-color: var(--primary-gold);
+            transform: scale(1.2);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .timeline-step:hover {
+            border-color: var(--primary-gold);
+            transform: scale(1.1);
+        }
+
+        /* Detailed Process Cards */
+        .detail-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .detail-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .detail-card h4 {
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .detail-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-card li {
+            position: relative;
+            padding: 8px 0 8px 30px;
+            color: var(--warm-white);
+        }
+
+        .detail-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .faq-question.active {
+            background: rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+            padding: 1rem 2rem 1.5rem;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .floating-1 { width: 120px; height: 120px; top: 15%; right: 10%; animation-delay: 0s; }
+        .floating-2 { width: 80px; height: 80px; top: 65%; left: 15%; animation-delay: 3s; }
+        .floating-3 { width: 100px; height: 100px; bottom: 25%; right: 20%; animation-delay: 6s; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .process-hero {
+                background-attachment: scroll;
+                min-height: 50vh;
+            }
+            
+            .step-card {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .process-connector {
+                display: none;
+            }
+            
+            .timeline-steps {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+            
+            .timeline-step {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .floating-element {
+                display: none;
+            }
+        }
+
+        /* Progress Animation */
+        @keyframes progressFill {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        .progress-animated {
+            animation: progressFill 2s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-floating">
+        <div class="flex items-center space-x-8 space-x-reverse">
+            <a href="index.html" class="text-2xl font-serif font-bold text-white">Weddinbox</a>
+            <div class="hidden md:flex items-center space-x-6 space-x-reverse">
+                <a href="about.html" class="nav-link">אודות</a>
+                <a href="packages.html" class="nav-link">חבילות</a>
+                <a href="gallery.html" class="nav-link">גלריה</a>
+                <a href="process.html" class="nav-link text-yellow-300">התהליך</a>
+                <a href="testimonials.html" class="nav-link">ממליצים</a>
+                <a href="contact.html" class="btn btn-primary text-sm">תיאום פגישה</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="process-hero flex items-center justify-center relative">
+        <div class="floating-element floating-1"></div>
+        <div class="floating-element floating-2"></div>
+        <div class="floating-element floating-3"></div>
+        
+        <div class="container text-center relative z-10">
+            <h1 class="text-6xl md:text-8xl font-serif font-black mb-6 text-gradient-gold" data-aos="fade-up">
+                התהליך שלנו
+            </h1>
+            <p class="text-2xl md:text-3xl font-inter font-light text-gray-200 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                4 שלבים פשוטים להפיכת החלום שלכם לאירוע מושלם
+            </p>
+            <div class="mt-12" data-aos="fade-up" data-aos-delay="400">
+                <div class="text-lg text-gray-300 font-inter">
+                    <span class="text-gold font-semibold">ממוצע זמן התהליך:</span> 6-12 חודשים לתכנון מושלם
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Timeline -->
+    <section class="interactive-timeline py-20">
+        <div class="container">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+                    המסע שלנו יחד
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    לחץ על כל שלב כדי לראות פירוט מלא של התהליך
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                <div class="timeline-track">
+                    <div class="timeline-progress" id="timeline-progress"></div>
+                </div>
+                <div class="timeline-steps">
+                    <div class="timeline-step active" data-step="1">1</div>
+                    <div class="timeline-step" data-step="2">2</div>
+                    <div class="timeline-step" data-step="3">3</div>
+                    <div class="timeline-step" data-step="4">4</div>
+                </div>
+            </div>
+
+            <!-- Step Details -->
+            <div class="max-w-4xl mx-auto mt-16" id="step-details">
+                <div class="step-detail active" data-step="1">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-6 text-center">שלב 1: שיחת השראה ויעוץ</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="detail-card">
+                            <h4>הפגישה הראשונה</h4>
+                            <ul>
+                                <li>הכרות אישית עם הזוג</li>
+                                <li>הבנת הסגנון והעדפות</li>
+                                <li>דיון בחזון האירוע</li>
+                                <li>קביעת תקציב מתאים</li>
+                                <li>הצגת דוגמאות רלוונטיות</li>
+                            </ul>
+                        </div>
+                        <div class="detail-card">
+                            <h4>תוצרים</h4>
+                            <ul>
+                                <li>דו"ח ייעוץ מפורט</li>
+                                <li>הצעת מחיר ראשונית</li>
+                                <li>לוח זמנים כללי</li>
+                                <li>רשימת ספקים מומלצים</li>
+                                <li>הצגת חבילות מתאימות</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-detail" data-step="2">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-6 text-center">שלב 2: פיתוח קונספט ועיצוב</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="detail-card">
+                            <h4>תכנון קריאטיבי</h4>
+                            <ul>
+                                <li>יצירת קונספט ייחודי</li>
+                                <li>בחירת פלטת צבעים</li>
+                                <li>עיצוב graphic ותמות</li>
+                                <li>תכנון פריסת המקום</li>
+                                <li>בחירת אלמנטי עיצוב</li>
+                            </ul>
+                        </div>
+                        <div class="detail-card">
+                            <h4>הדמיות וחומרי עזר</h4>
+                            <ul>
+                                <li>הדמיות 3D של האירוע</li>
+                                <li>מודבורד מפורט</li>
+                                <li>דוגמאות עיצוב ודקורציה</li>
+                                <li>הצגת חלופות עיצוב</li>
+                                <li>אישור הקונספט הסופי</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-detail" data-step="3">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-6 text-center">שלב 3: תיאום ספקים ולוגיסטיקה</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="detail-card">
+                            <h4>בחירת הנבחרת</h4>
+                            <ul>
+                                <li>סינון וקביעת פגישות עם ספקים</li>
+                                <li>ניהול משא ומתן</li>
+                                <li>בדיקת רפרנסים ואישורים</li>
+                                <li>חתימה על חוזים</li>
+                                <li>תיאום לוחות זמנים</li>
+                            </ul>
+                        </div>
+                        <div class="detail-card">
+                            <h4>ניהול פרויקט</h4>
+                            <ul>
+                                <li>יצירת לוח זמנים מפורט</li>
+                                <li>ניהול תקציב ומעקב הוצאות</li>
+                                <li>תיאום בין כל הגורמים</li>
+                                <li>הזמנת ציוד ושירותים</li>
+                                <li>ביצוע בדיקות איכות</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-detail" data-step="4">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-6 text-center">שלב 4: הביצוע והגשמה</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="detail-card">
+                            <h4>יום האירוע</h4>
+                            <ul>
+                                <li>ליווי מלא ביום האירוع</li>
+                                <li>פיקוח על הכנת המקום</li>
+                                <li>תיאום כל הספקים</li>
+                                <li>פתרון בעיות בזמן אמת</li>
+                                <li>דאגה לכל הפרטים הקטנים</li>
+                            </ul>
+                        </div>
+                        <div class="detail-card">
+                            <h4>שירות מלא</h4>
+                            <ul>
+                                <li>צוות מקצועי בשטח</li>
+                                <li>ניהול רצף האירוע</li>
+                                <li>שירות אורחים מקצועי</li>
+                                <li>פירוק וניקוי</li>
+                                <li>מסירת זיכרונות מהאירוע</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Process Steps -->
+    <section class="py-32 bg-charcoal">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    4 שלבים לחתונה מושלמת
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    כל שלב מתוכנן בדיוק כדי להבטיח חוויה חלקה ותוצאה מושלמת
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number font-serif">1</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">שיחת השראה</h3>
+                    <p class="text-gray-300 font-inter leading-relaxed mb-6">
+                        פגישה אישית בה נצלול לחזון שלכם, נבין את הסגנון ונכיר את הסיפור הייחודי שלכם
+                    </p>
+                    <div class="text-sm text-gold font-semibold">
+                        ⏱️ משך: 2-3 שעות
+                    </div>
+                    <div class="process-connector hidden xl:block"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number font-serif">2</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">תפירת הקונספט</h3>
+                    <p class="text-gray-300 font-inter leading-relaxed mb-6">
+                        צוות הקריאייטיב שלנו יתרגם את החלומות לתוכנית הפקה מפורטת ומותאמת אישית
+                    </p>
+                    <div class="text-sm text-gold font-semibold">
+                        ⏱️ משך: 2-4 שבועות
+                    </div>
+                    <div class="process-connector hidden xl:block"></div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number font-serif">3</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">בחירת הנבחרת</h3>
+                    <p class="text-gray-300 font-inter leading-relaxed mb-6">
+                        אנו בוחרים יחד את נבחרת הספקים המושלמת מתוך מאגר אנשי המקצוע הטובים ביותר
+                    </p>
+                    <div class="text-sm text-gold font-semibold">
+                        ⏱️ משך: 4-8 שבועות
+                    </div>
+                    <div class="process-connector hidden xl:block"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number font-serif">4</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">הגשמה וליווי</h3>
+                    <p class="text-gray-300 font-inter leading-relaxed mb-6">
+                        אנחנו מנהלים הכל מקצה לקצה ומלווים אתכם ביום האירוע. אתם פשוט נהנים מהרגע
+                    </p>
+                    <div class="text-sm text-gold font-semibold">
+                        ⏱️ משך: יום האירוע + מעקב
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-32 bg-gradient-dark">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    שאלות נפוצות על התהליך
+                </h2>
+                <p class="text-xl text-gray-300 font-inter">
+                    התשובות לשאלות הנפוצות ביותר על אופן העבודה שלנו
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <h3 class="text-xl font-serif font-bold text-white">כמה זמן לוקח כל התהליך מתחילה לסיום?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-300 font-inter">
+                            בממוצע התהליך לוקח בין 6-12 חודשים, תלוי במורכבות האירוע ובגודלו. אירועים גדולים ומורכבים יותר דורשים זמן תכנון ארוך יותר. אנחנו ממליצים להתחיל את התכנון לפחות 8-10 חודשים לפני התאריך הרצוי.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <h3 class="text-xl font-serif font-bold text-white">האם אני יכול להיות מעורב בכל שלב של התהליך?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-300 font-inter">
+                            בהחלט! זה האירוע שלכם ואנחנו רוצים שתהיו מעורבים בכל החלטה. נעדכן אתכם בכל שלב, נשלח עדכונים סדירים ונוודא שאתם מרוצים מכל פרט לפני שנמשיך לשלב הבא.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <h3 class="text-xl font-serif font-bold text-white">מה קורה אם אני רוצה לשנות משהו באמצע התהליך?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-300 font-inter">
+                            שינויים הם חלק טבעי מהתהליך! אנחנו מבינים שלעיתים יש צורך להתאים ולשנות. נעבוד יחד כדי להתאים את התכנון לרצונות החדשים שלכם, ונדאג לעדכן את כל הגורמים הרלוונטיים.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <h3 class="text-xl font-serif font-bold text-white">איך אתם מתמודדים עם בעיות לא צפויות ביום האירוע?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-300 font-inter">
+                            יש לנו צוות מנוסה עם תוכניות חירום לכל מצב אפשרי. אנחנו מכינים תוכניות גיבוי למזג האוויר, ספקים, וכל מצב בלתי צפוי אחר. הצוות שלנו נוכח באירוע מההתחלה ועד הסוף כדי לטפל בכל נושא שעולה.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="faq-question">
+                        <h3 class="text-xl font-serif font-bold text-white">האם אני יכול לבחור ספקים בעצמי או שאתם בוחרים בשבילי?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-300 font-inter">
+                            אנחנו עובדים בשיתוף מלא איתכם. נציג לכם את הספקים המומלצים שלנו, אבל אתם תמיד יכולים לבחור ספקים אחרים או להביא ספקים משלכם. נדאג לתאם עם כל הספקים שתבחרו ולוודא שהם מתאימים לסטנדרטים שלנו.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="faq-question">
+                        <h3 class="text-xl font-serif font-bold text-white">מה כלול בליווי ביום האירוע?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-300 font-inter">
+                            הליווי שלנו כולל: הגעה מוקדמת להכנת המקום, פיקוח על כל הספקים, ניהול לוחות הזמנים, פתרון כל בעיה שעולה, עזרה לזוג ולמשפחה, ודאגה לכל הפרטים הקטנים כך שאתם תוכלו להתרכז רק בלהנות מהיום המיוחד.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Benefits -->
+    <section class="py-32 bg-charcoal">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    למה התהליך שלנו עובד
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    שנים של ניסיון לימדו אותנו איך להפוך חלומות למציאות בצורה המקצועית ביותר
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-6xl mb-6">🎯</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">תכנון מדויק</h3>
+                    <p class="text-gray-300 font-inter">
+                        כל פרט מתוכנן מראש עם לוחות זמנים מפורטים ותכניות גיבוי לכל מצב אפשרי
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-6xl mb-6">🤝</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">שיתוף פעולה</h3>
+                    <p class="text-gray-300 font-inter">
+                        אנחנו עובדים יחד איתכם בכל שלב, מקשיבים לרצונות שלכם ומתאימים את התכנון בהתאם
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-6xl mb-6">⚡</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">יעילות מקסימלית</h3>
+                    <p class="text-gray-300 font-inter">
+                        הניסיון שלנו מאפשר לנו לעבוד בצורה יעילה וחסכונית, ולחסוך לכם זמן ועצבים
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-6xl mb-6">🎨</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">יצירתיות ללא גבולות</h3>
+                    <p class="text-gray-300 font-inter">
+                        הצוות הקריאטיבי שלנו חושב מחוץ לקופסה ויוצר פתרונות יצירתיים ייחודיים לכל זוג
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-6xl mb-6">🛡️</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">אמינות מובטחת</h3>
+                    <p class="text-gray-300 font-inter">
+                        אנחנו עומדים מאחורי כל הבטחה ומתחייבים לתוצאה מושלמת ללא פשרות באיכות
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-6xl mb-6">💎</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">מצוינות מקצועית</h3>
+                    <p class="text-gray-300 font-inter">
+                        רמת השירות והמקצועיות הגבוהה ביותר, עם צוות מנוסה ומוכשר בכל תחום
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 bg-gradient-dark relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-radial opacity-20"></div>
+        </div>
+        
+        <div class="container text-center relative z-10">
+            <div data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-8">
+                    מוכנים להתחיל את המסע?
+                </h2>
+                <p class="text-2xl text-gray-300 font-inter mb-12 max-w-3xl mx-auto">
+                    בואו נתחיל את השלב הראשון - שיחת השראה ללא התחייבות שבה נכיר ונתכנן יחד את החלום שלכם
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="contact.html" class="btn btn-primary text-xl px-12 py-4">
+                        בואו נתחיל את התהליך
+                    </a>
+                    <a href="packages.html" class="btn btn-secondary text-xl px-12 py-4">
+                        ראו את החבילות
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">Weddinbox</h3>
+                    <p class="text-gray-400 font-inter leading-relaxed">
+                        תופרים חלומות, יוצרים חוויות בלתי נשכחות. <br>
+                        המומחים בהפקת אירועי יוקרה בישראל.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-white mb-4">קישורים מהירים</h4>
+                    <ul class="space-y-2 text-gray-400 font-inter">
+                        <li><a href="about.html" class="hover:text-yellow-300 transition-colors">אודות</a></li>
+                        <li><a href="packages.html" class="hover:text-yellow-300 transition-colors">חבילות</a></li>
+                        <li><a href="gallery.html" class="hover:text-yellow-300 transition-colors">גלריה</a></li>
+                        <li><a href="process.html" class="hover:text-yellow-300 transition-colors text-yellow-300">התהליך</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-white mb-4">יצירת קשר</h4>
+                    <ul class="space-y-2 text-gray-400 font-inter">
+                        <li>📞 050-123-4567</li>
+                        <li>📧 info@weddinbox.co.il</li>
+                        <li>📍 תל אביב, ישראל</li>
+                        <li>🕒 א'-ה' 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 font-inter">
+                <p>&copy; 2025 Weddinbox. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Interactive Timeline
+        class ProcessTimeline {
+            constructor() {
+                this.currentStep = 1;
+                this.init();
+            }
+
+            init() {
+                this.setupStepNavigation();
+                this.updateProgress();
+            }
+
+            setupStepNavigation() {
+                const stepButtons = document.querySelectorAll('.timeline-step');
+                const stepDetails = document.querySelectorAll('.step-detail');
+
+                stepButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const step = parseInt(button.dataset.step);
+                        this.setActiveStep(step);
+                    });
+                });
+            }
+
+            setActiveStep(step) {
+                this.currentStep = step;
+
+                // Update step buttons
+                document.querySelectorAll('.timeline-step').forEach(button => {
+                    button.classList.remove('active');
+                    if (parseInt(button.dataset.step) === step) {
+                        button.classList.add('active');
+                    }
+                });
+
+                // Update step details
+                document.querySelectorAll('.step-detail').forEach(detail => {
+                    detail.classList.remove('active');
+                    if (parseInt(detail.dataset.step) === step) {
+                        detail.classList.add('active');
+                    }
+                });
+
+                // Update progress
+                this.updateProgress();
+            }
+
+            updateProgress() {
+                const progress = document.getElementById('timeline-progress');
+                const percentage = ((this.currentStep - 1) / 3) * 100;
+                progress.style.width = `${percentage}%`;
+            }
+        }
+
+        // FAQ Accordion
+        class FAQAccordion {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                const faqQuestions = document.querySelectorAll('.faq-question');
+
+                faqQuestions.forEach(question => {
+                    question.addEventListener('click', () => {
+                        const faqItem = question.parentElement;
+                        const faqAnswer = faqItem.querySelector('.faq-answer');
+                        const isActive = question.classList.contains('active');
+
+                        // Close all other FAQ items
+                        document.querySelectorAll('.faq-question').forEach(q => {
+                            q.classList.remove('active');
+                            q.parentElement.querySelector('.faq-answer').classList.remove('active');
+                        });
+
+                        // Toggle current item
+                        if (!isActive) {
+                            question.classList.add('active');
+                            faqAnswer.classList.add('active');
+                        }
+                    });
+                });
+            }
+        }
+
+        // Step Card Hover Effects
+        function setupStepCards() {
+            const stepCards = document.querySelectorAll('.step-card');
+
+            stepCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-12px) scale(1.02)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProcessTimeline();
+            new FAQAccordion();
+            setupStepCards();
+        });
+
+        // Intersection Observer for Timeline Progress Animation
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progress = document.getElementById('timeline-progress');
+                    progress.classList.add('progress-animated');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const timeline = document.querySelector('.timeline-track');
+        if (timeline) {
+            timelineObserver.observe(timeline);
+        }
+    </script>
+</body>
+</html>
