@@ -1,1 +1,815 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אודות Weddinbox | הסיפור מאחורי ההפקה המושלמת</title>
+    <meta name="description" content="הכירו את הצוות המקצועי מאחורי Weddinbox - שנות ניסיון בהפקת אירועי יוקרה והפיסלופיה שמנחה אותנו ליצור חוויות בלתי נשכחות.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --light-gold: #F4E4BC;
+            --charcoal: #1A1A1A;
+            --deep-black: #0D0D0D;
+            --warm-white: #FAFAFA;
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 100%);
+            --gradient-dark: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+        }
 
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--deep-black);
+            color: var(--warm-white);
+            overflow-x: hidden;
+        }
+
+        .font-serif { font-family: 'Frank Ruhl Libre', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+
+        /* About Hero */
+        .about-hero {
+            background: linear-gradient(rgba(13, 13, 13, 0.6), rgba(26, 26, 26, 0.8)), 
+                        url('https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080') center/cover;
+            background-attachment: fixed;
+            min-height: 70vh;
+            position: relative;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-gold);
+        }
+
+        /* Team Member Cards */
+        .team-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15);
+        }
+
+        .team-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-gold);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .team-photo {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Values Cards */
+        .value-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-gold);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 50%;
+            padding-right: 2rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 50%;
+            padding-left: 2rem;
+            text-align: left;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 4px solid var(--deep-black);
+            z-index: 10;
+        }
+
+        .timeline-content {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-year {
+            background: var(--gradient-gold);
+            color: var(--deep-black);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Statistics */
+        .stat-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        /* Floating particles */
+        .floating-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.8), transparent);
+            border-radius: 50%;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .floating-particle:nth-child(1) { top: 10%; right: 10%; animation-delay: 0s; }
+        .floating-particle:nth-child(2) { top: 60%; left: 15%; animation-delay: 4s; }
+        .floating-particle:nth-child(3) { bottom: 30%; right: 25%; animation-delay: 8s; }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                background-attachment: scroll;
+                min-height: 50vh;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin: 0;
+                margin-left: 60px;
+                padding-left: 1rem;
+                text-align: right;
+            }
+            
+            .timeline-marker {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-floating">
+        <div class="flex items-center space-x-8 space-x-reverse">
+            <a href="index.html" class="text-2xl font-serif font-bold text-white">Weddinbox</a>
+            <div class="hidden md:flex items-center space-x-6 space-x-reverse">
+                <a href="about.html" class="nav-link text-yellow-300">אודות</a>
+                <a href="packages.html" class="nav-link">חבילות</a>
+                <a href="gallery.html" class="nav-link">גלריה</a>
+                <a href="process.html" class="nav-link">התהליך</a>
+                <a href="testimonials.html" class="nav-link">ממליצים</a>
+                <a href="contact.html" class="btn btn-primary text-sm">תיאום פגישה</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero flex items-center justify-center relative">
+        <div class="floating-particle"></div>
+        <div class="floating-particle"></div>
+        <div class="floating-particle"></div>
+        
+        <div class="container text-center relative z-10">
+            <h1 class="text-6xl md:text-8xl font-serif font-black mb-6 text-gradient-gold" data-aos="fade-up">
+                הסיפור שלנו
+            </h1>
+            <p class="text-2xl md:text-3xl font-inter font-light text-gray-200 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                מתוך אהבה לפרטים הקטנים שיוצרים רגעים גדולים
+            </p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section py-32 relative">
+        <div class="container">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <img src="https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600" 
+                         alt="צוות Weddinbox בעבודה" 
+                         class="rounded-2xl shadow-2xl w-full hover:scale-105 transition-transform duration-500">
+                </div>
+                <div data-aos="fade-left" data-aos-delay="200">
+                    <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-8">
+                        הפילוסופיה שלנו
+                    </h2>
+                    <p class="text-xl text-gray-300 font-inter leading-relaxed mb-6">
+                        ב-<span class="text-gold font-bold">Weddinbox</span> אנחנו מאמינים שכל אירוע הוא סיפור ייחודי שמחכה להיכתב. 
+                        אנחנו לא רק מפיקים אירועים - אנחנו יוצרים זיכרונות שיישמרו לנצח.
+                    </p>
+                    <p class="text-lg text-gray-400 font-inter leading-relaxed mb-6">
+                        עם <span class="text-gold font-semibold">יותר מ-10 שנות ניסיון</span> בתחום הפקת האירועים, 
+                        צברנו מומחיות בלתי רגיל ביצירת חוויות בלתי נשכחות. כל אירוע שאנחנו מפיקים מקבל 
+                        את מלוא תשומת הלב שלנו והתייחסות אישית מקצועית.
+                    </p>
+                    <p class="text-lg text-gray-400 font-inter leading-relaxed">
+                        <span class="text-gold font-semibold">המטרה שלנו פשוטה:</span> להפוך את היום הכי חשוב 
+                        בחייכם לחוויה מושלמת, בלי שתצטרכו לדאוג על שום דבר. אנחנו כאן כדי שתוכלו פשוט להיות נוכחים ולהנות מהרגע.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-32 bg-charcoal">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    הצוות שלנו
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    אנשי מקצוע מנוסים עם תשוקה לפרטים ויכולת להפוך חלומות למציאות
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="team-card text-center" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=300&h=300" 
+                         alt="שרה כהן - מנהלת פרויקטים" 
+                         class="team-photo mx-auto">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">שרה כהן</h3>
+                    <p class="text-gold font-semibold mb-4">מנהלת פרויקטים בכירה</p>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        12 שנות ניסיון בהפקת אירועי יוקרה. מתמחה בתיאום מורכב ומדייקת עד הפרט הקטן ביותר. 
+                        האמה בכל פרויקט שלה היא "אין דבר בלתי אפשרי".
+                    </p>
+                </div>
+
+                <div class="team-card text-center" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=300&h=300" 
+                         alt="דני לוי - מעצב אירועים" 
+                         class="team-photo mx-auto">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">דני לוי</h3>
+                    <p class="text-gold font-semibold mb-4">מעצב אירועים ראשי</p>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        אמן בעל חזון יוצא דופן. יוצר קונספטים ייחודיים שהופכים כל אירוע לחוויה ויזואלית מרהיבה. 
+                        זוכה פרסים בינלאומיים בעיצוב אירועים.
+                    </p>
+                </div>
+
+                <div class="team-card text-center" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=300&h=300" 
+                         alt="מיכל אברהם - יועצת לקוחות" 
+                         class="team-photo mx-auto">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">מיכל אברהם</h3>
+                    <p class="text-gold font-semibold mb-4">יועצת לקוחות ראשית</p>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        מתמחה בהקשבה עמוקה וחיוךבסייטן של רצונות הלקוח לתוכנית פעולה מפורטת. 
+                        מלווה אתכם לאורך כל הדרך עד לרגע המושלם.
+                    </p>
+                </div>
+
+                <div class="team-card text-center" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=300&h=300" 
+                         alt="אלון גרין - מנהל לוגיסטיקה" 
+                         class="team-photo mx-auto">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">אלון גרין</h3>
+                    <p class="text-gold font-semibold mb-4">מנהל לוגיסטיקה</p>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        המוח הלוגיסטי מאחורי האירועים. דואג שכל פרט יגיע במקום הנכון בזמן הנכון. 
+                        מומחה בפתרון בעיות מורכבות תחת לחץ.
+                    </p>
+                </div>
+
+                <div class="team-card text-center" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://images.pexels.com/photos/1484794/pexels-photo-1484794.jpeg?auto=compress&cs=tinysrgb&w=300&h=300" 
+                         alt="נועה דוד - מנהלת קריאייטיב" 
+                         class="team-photo mx-auto">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">נועה דוד</h3>
+                    <p class="text-gold font-semibold mb-4">מנהלת קריאייטיב</p>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        בעלת דמיון חסר גבולות ויכולת לחשוב מחוץ לקופסה. יוצרת חוויות לא שגרתיות 
+                        שמותירות רושם בל יימחה על הזוג ועל האורחים.
+                    </p>
+                </div>
+
+                <div class="team-card text-center" data-aos="fade-up" data-aos-delay="600">
+                    <img src="https://images.pexels.com/photos/1139743/pexels-photo-1139743.jpeg?auto=compress&cs=tinysrgb&w=300&h=300" 
+                         alt="יוסי מלכה - מנהל ביצוע" 
+                         class="team-photo mx-auto">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">יוסי מלכה</h3>
+                    <p class="text-gold font-semibold mb-4">מנהל ביצוע</p>
+                    <p class="text-gray-300 font-inter leading-relaxed">
+                        נוכח באירוע מתחילת היום ועד סיומו. דואג שהכל יעבור בצורה חלקה ומושלמת. 
+                        מומחה בניהול צוותים ותיאום בין כל הגורמים המעורבים.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-32 bg-gradient-dark">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    הערכים שלנו
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    העקרונות המנחים אותנו בכל פרויקט ומחזקים את המחויבות שלנו למצוינות
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-icon">✨</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">מצוינות</h3>
+                    <p class="text-gray-300 font-inter">
+                        אנחנו שואפים למצוינות בכל פרט, גדול או קטן, כי מאמינים שהפרטים הם שיוצרים את הקסם
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-icon">💝</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">אמינות</h3>
+                    <p class="text-gray-300 font-inter">
+                        המילה שלנו היא הערובה שלנו. אנחנו עומדים מאחורי כל הבטחה ומקפידים על שקיפות מלאה
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-icon">🎨</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">יצירתיות</h3>
+                    <p class="text-gray-300 font-inter">
+                        כל אירוע הוא הזדמנות לחדש ולהפתיע. אנחנו מחפשים פתרונות יצירתיים לכל אתגר
+                    </p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="value-icon">❤️</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">תשוקה</h3>
+                    <p class="text-gray-300 font-inter">
+                        אנחנו עושים את מה שאנחנו אוהבים ואוהבים את מה שאנחנו עושים. זה מרגיש בכל אירוع
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-32 bg-charcoal">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    המסע שלנו
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    מחלום קטן למותג מוביל בתחום הפקת אירועי היוקרה בישראל
+                </p>
+            </div>
+
+            <div class="timeline max-w-6xl mx-auto">
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2014</div>
+                        <h3 class="text-2xl font-serif font-bold text-white mb-3">ההתחלה</h3>
+                        <p class="text-gray-300 font-inter">
+                            בתקופת הקורונה פיתחנו פתרונות חדשניים לאירועים מצומצמים וכיבדנו את התקנות 
+                            תוך שמירה על הקסם והייחודיות של כל אירוע.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2022</div>
+                        <h3 class="text-2xl font-serif font-bold text-white mb-3">הכרה בינלאומית</h3>
+                        <p class="text-gray-300 font-inter">
+                            זכייה בתחרות הבינלאומית "Luxury Wedding Planner of the Year". 
+                            התחלנו לקבל הזמנות מזוגות מחו"ל לאירועים בישראל.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <h3 class="text-2xl font-serif font-bold text-white mb-3">המשך המצוינות</h3>
+                        <p class="text-gray-300 font-inter">
+                            יותר מ-500 אירועים מוצלחים, צוות של 15 מקצוענים, וחזון להמשיך לחדש 
+                            ולהתפתח בעולם הפקת האירועים היוקרתיים.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-32 bg-gradient-dark">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    המספרים מדברים
+                </h2>
+                <p class="text-xl text-gray-300 font-inter">
+                    עשור של מצוינות במספרים
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-number" data-counter="500">0</div>
+                    <p class="text-gray-300 font-inter font-semibold mt-2">אירועים מוצלחים</p>
+                </div>
+
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-number" data-counter="98">0</div>
+                    <p class="text-gray-300 font-inter font-semibold mt-2">אחוז שביעות רצון</p>
+                </div>
+
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-number" data-counter="15">0</div>
+                    <p class="text-gray-300 font-inter font-semibold mt-2">מקצוענים בצוות</p>
+                </div>
+
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="stat-number" data-counter="10">0</div>
+                    <p class="text-gray-300 font-inter font-semibold mt-2">שנות ניסיון</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="py-32 bg-charcoal">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-6">
+                    הישגים והכרה
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    פרסים והכרה מקצועית המאשרים את רמת המצוינות שלנו
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-6xl mb-6">🏆</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">מפיק השנה 2022</h3>
+                    <p class="text-gray-300 font-inter">
+                        פרס יוקרתי מטעם איגוד מפיקי האירועים הישראלי על הצטיינות במקצועיות ויצירתיות
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-6xl mb-6">🌟</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">Luxury Planner International</h3>
+                    <p class="text-gray-300 font-inter">
+                        הכרה בינלאומית כאחת מחברות הפקת האירועים היוקרתיות המובילות במזרח התיכון
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-6xl mb-6">💎</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">Excellence in Design</h3>
+                    <p class="text-gray-300 font-inter">
+                        פרס מיוחד על עיצוב חדשני ויצירתי באירוע חתונה יוקרתי בתל אביב ב-2023
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-6xl mb-6">⭐</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">Best Customer Service</h3>
+                    <p class="text-gray-300 font-inter">
+                        דירוג 5 כוכבים עקבי בכל הפלטפורמות הדיגיטליות ושביעות רצון של 98% מהלקוחות
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-6xl mb-6">🎭</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">Innovation Award</h3>
+                    <p class="text-gray-300 font-inter">
+                        פרס חדשנות על פיתוח פתרונות טכנולוגיים מתקדמים לניהול ובקרת אירועים
+                    </p>
+                </div>
+
+                <div class="card text-center hover-lift" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-6xl mb-6">🌍</div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-4">Sustainability Leader</h3>
+                    <p class="text-gray-300 font-inter">
+                        הכרה במחויבות לקיימות סביבתית ובפיתוח אירועים ירוקים וחברתית אחראיים
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 bg-gradient-dark relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-radial opacity-20"></div>
+        </div>
+        
+        <div class="container text-center relative z-10">
+            <div data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-white mb-8">
+                    רוצים להכיר אותנו יותר?
+                </h2>
+                <p class="text-2xl text-gray-300 font-inter mb-12 max-w-3xl mx-auto">
+                    בואו נפגש לשיחה אישית ונספר לכם איך אנחנו הופכים חלומות למציאות
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="contact.html" class="btn btn-primary text-xl px-12 py-4">
+                        בואו נפגש
+                    </a>
+                    <a href="gallery.html" class="btn btn-secondary text-xl px-12 py-4">
+                        הגלריה שלנו
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">Weddinbox</h3>
+                    <p class="text-gray-400 font-inter leading-relaxed">
+                        תופרים חלומות, יוצרים חוויות בלתי נשכחות. <br>
+                        המומחים בהפקת אירועי יוקרה בישראל.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-white mb-4">קישורים מהירים</h4>
+                    <ul class="space-y-2 text-gray-400 font-inter">
+                        <li><a href="about.html" class="hover:text-yellow-300 transition-colors text-yellow-300">אודות</a></li>
+                        <li><a href="packages.html" class="hover:text-yellow-300 transition-colors">חבילות</a></li>
+                        <li><a href="gallery.html" class="hover:text-yellow-300 transition-colors">גלריה</a></li>
+                        <li><a href="process.html" class="hover:text-yellow-300 transition-colors">התהליך</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-serif font-bold text-white mb-4">יצירת קשר</h4>
+                    <ul class="space-y-2 text-gray-400 font-inter">
+                        <li>📞 050-123-4567</li>
+                        <li>📧 info@weddinbox.co.il</li>
+                        <li>📍 תל אביב, ישראל</li>
+                        <li>🕒 א'-ה' 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 font-inter">
+                <p>&copy; 2025 Weddinbox. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const updateCounter = () => {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+            
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Initialize counters when in view
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.dataset.counter);
+                    animateCounter(counter, target);
+                    observer.unobserve(counter);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, {
+            threshold: 0.5
+        });
+
+        document.querySelectorAll('[data-counter]').forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Team card hover effects
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Value cards interaction
+        document.querySelectorAll('.value-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.value-icon');
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.value-icon');
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>gray-300 font-inter">
+                            נוסדה החברה מתוך חלום להביא חדשנות ויוקרה לעולם הפקת האירועים. 
+                            עם צוות קטן ותשוקה גדולה, התחלנו את המסע.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2016</div>
+                        <h3 class="text-2xl font-serif font-bold text-white mb-3">הרחבה ראשונה</h3>
+                        <p class="text-gray-300 font-inter">
+                            לאחר 50 אירועים מוצלחים, הרחבנו את הצוות וההיצע. הוספנו שירותי עיצוב מתקדמים 
+                            וקשרים עם ספקים יוקרתיים מהמיטב בארץ.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2018</div>
+                        <h3 class="text-2xl font-serif font-bold text-white mb-3">פריצת דרך</h3>
+                        <p class="text-gray-300 font-inter">
+                            זכייה בפרס "מפיק השנה" בתערוכת החתונות הישראלית. הפכנו לשם דבר בקרב 
+                            זוגות המחפשים אירוע ייחודי וברמה גבוהה.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020</div>
+                        <h3 class="text-2xl font-serif font-bold text-white mb-3">חדשנות בקורונה</h3>
+                        <p class="text-
