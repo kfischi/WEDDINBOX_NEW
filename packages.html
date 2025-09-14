@@ -1,1 +1,486 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חבילות השירות | Weddinbox - אירועי יוקרה</title>
+    <meta name="description" content="גלו את חבילות השירות המותאמות שלנו - מהקלאסיק ועד ללא הגבלות. כל חלום ארוז בקופסה מושלמת עבורכם.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --light-gold: #F4E4BC;
+            --charcoal: #1A1A1A;
+            --deep-black: #0D0D0D;
+            --warm-white: #FAFAFA;
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 100%);
+            --gradient-dark: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+        }
 
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--deep-black);
+            color: var(--warm-white);
+            overflow-x: hidden;
+        }
+
+        .font-serif { font-family: 'Frank Ruhl Libre', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+
+        /* Header Background */
+        .packages-hero {
+            background: linear-gradient(rgba(13, 13, 13, 0.7), rgba(26, 26, 26, 0.8)), 
+                        url('https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080') center/cover;
+            background-attachment: fixed;
+            min-height: 60vh;
+            position: relative;
+        }
+
+        /* Package Cards */
+        .package-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid rgba(212, 175, 55, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 
+                0 25px 80px rgba(212, 175, 55, 0.15),
+                0 0 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .package-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Premium Package Highlight */
+        .package-premium {
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            background: rgba(212, 175, 55, 0.05);
+            transform: scale(1.05);
+            position: relative;
+        }
+
+        .package-premium::after {
+            content: 'המומלץ';
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: var(--gradient-gold);
+            color: var(--deep-black);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Package Icons */
+        .package-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Price Display */
+        .package-price {
+            background: var(--gradient-gold);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            position: relative;
+            padding: 12px 0 12px 30px;
+            color: var(--warm-white);
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+        }
+
+        /* CTA Buttons */
+        .btn-package {
+            width: 100%;
+            background: transparent;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-package:hover {
+            background: var(--gradient-gold);
+            color: var(--deep-black);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-package-premium {
+            background: var(--gradient-gold);
+            color: var(--deep-black);
+            border-color: transparent;
+        }
+
+        .btn-package-premium:hover {
+            background: var(--primary-gold);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 24px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .comparison-header {
+            background: var(--gradient-gold);
+            color: var(--deep-black);
+            padding: 24px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+        }
+
+        .comparison-cell {
+            padding: 20px;
+            text-align: center;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-cell:first-child {
+            text-align: right;
+            font-weight: 600;
+            border-left: none;
+        }
+
+        .check-mark {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            right: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-2 {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            left: 10%;
+            animation-delay: 3s;
+        }
+
+        .floating-3 {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 6s;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .packages-hero {
+                background-attachment: scroll;
+                min-height: 40vh;
+            }
+            
+            .package-premium {
+                transform: none;
+                margin: 20px 0;
+            }
+            
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .comparison-cell {
+                border-left: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .floating-element {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-floating">
+        <div class="flex items-center space-x-8 space-x-reverse">
+            <a href="index.html" class="text-2xl font-serif font-bold text-white">Weddinbox</a>
+            <div class="hidden md:flex items-center space-x-6 space-x-reverse">
+                <a href="about.html" class="nav-link">אודות</a>
+                <a href="packages.html" class="nav-link text-yellow-300">חבילות</a>
+                <a href="gallery.html" class="nav-link">גלריה</a>
+                <a href="process.html" class="nav-link">התהליך</a>
+                <a href="testimonials.html" class="nav-link">ממליצים</a>
+                <a href="contact.html" class="btn btn-primary text-sm">תיאום פגישה</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="packages-hero flex items-center justify-center relative">
+        <!-- Floating Elements -->
+        <div class="floating-element floating-1"></div>
+        <div class="floating-element floating-2"></div>
+        <div class="floating-element floating-3"></div>
+        
+        <div class="container text-center relative z-10">
+            <h1 class="text-6xl md:text-8xl font-serif font-black mb-6 text-gradient-gold" data-aos="fade-up">
+                חבילות השירות
+            </h1>
+            <p class="text-2xl md:text-3xl font-inter font-light text-gray-200 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                כל חלום ארוז בקופסה מושלמת
+            </p>
+        </div>
+    </section>
+
+    <!-- Packages Grid -->
+    <section class="py-32 bg-gradient-dark relative">
+        <div class="container">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+                    בחרו את החבילה המושלמת עבורכם
+                </h2>
+                <p class="text-xl text-gray-300 font-inter max-w-3xl mx-auto">
+                    מהבסיס המושלם ועד חוויות ללא גבולות - יש לנו את החבילה המתאימה לכל חלום
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Classic Box -->
+                <div class="package-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="package-icon">💎</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">The Classic Box</h3>
+                    <div class="package-price text-4xl font-serif mb-6">₪150K-250K</div>
+                    <p class="text-gray-300 mb-8 font-inter">הבסיס המושלם לאירוע אלגנטי ובלתי נשכח.</p>
+                    
+                    <ul class="features-list mb-8">
+                        <li>אולם / גן אירועים יוקרתי</li>
+                        <li>קייטרינג שף ברמה גבוהה</li>
+                        <li>צלם סטילס מקצועי</li>
+                        <li>DJ ומערכת הגברה</li>
+                        <li>עיצוב בסיסי של האירוע</li>
+                        <li>תיאום יום האירוע</li>
+                    </ul>
+                    
+                    <a href="contact.html" class="btn-package">בחירה בחבילה</a>
+                </div>
+
+                <!-- Premium Box -->
+                <div class="package-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="package-icon">👑</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">The Premium Box</h3>
+                    <div class="package-price text-4xl font-serif mb-6">₪250K-400K</div>
+                    <p class="text-gray-300 mb-8 font-inter">משדרגים את החוויה עם כל מה שצריך לאירוע "וואו".</p>
+                    
+                    <ul class="features-list mb-8">
+                        <li>כל מה שכלול בחבילת הקלאסיק</li>
+                        <li>עיצוב קונספט מלא ומותאם</li>
+                        <li>צלם וידאו ועריכה מקצועית</li>
+                        <li>בר קוקטיילים יוקרתי</li>
+                        <li>להקה חיה / אמן מובילים</li>
+                        <li>עיצוב פרחים מתקדם</li>
+                        <li>מתנות לאורחים</li>
+                    </ul>
+                    
+                    <a href="contact.html" class="btn-package">בחירה בחבילה</a>
+                </div>
+
+                <!-- Luxury Box - Featured -->
+                <div class="package-card package-premium" data-aos="fade-up" data-aos-delay="300">
+                    <div class="package-icon">✨</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">The Luxury Box</h3>
+                    <div class="package-price text-4xl font-serif mb-6">₪400K-600K</div>
+                    <p class="text-gray-300 mb-8 font-inter">אירוע של פעם בחיים, עם הפקה מלאה וחוויה טוטאלית.</p>
+                    
+                    <ul class="features-list mb-8">
+                        <li>כל מה שכלול בחבילת הפרימיום</li>
+                        <li>אטרקציות ייחודיות למקום</li>
+                        <li>ניהול והפקה מלאה בשטח</li>
+                        <li>חוויות נלוות לאורחים</li>
+                        <li>שף אישי וקייטרינג בוטיק</li>
+                        <li>עיצוב תלת מימדי מלא</li>
+                        <li>רכב יוקרה לזוג</li>
+                    </ul>
+                    
+                    <a href="contact.html" class="btn-package btn-package-premium">בחירה בחבילה</a>
+                </div>
+
+                <!-- No Limits Box -->
+                <div class="package-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="package-icon">🚁</div>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4">The No-Limits Box</h3>
+                    <div class="package-price text-4xl font-serif mb-6">₪600K+</div>
+                    <p class="text-gray-300 mb-8 font-inter">הגבול הוא הדמיון שלכם. כל פנטזיה הופכת למציאות.</p>
+                    
+                    <ul class="features-list mb-8">
+                        <li>כל מה שכלול בחבילת היוקרה</li>
+                        <li>הגעה במסוק / יאכטה פרטית</li>
+                        <li>אירוע בחו"ל במקומות חלומיים</li>
+                        <li>אמנים בינלאומיים</li>
+                        <li>חוויות אקסטרימליות</li>
+                        <li>הגשמת כל חלום ורצון</li>
+                        <li>צוות ייעודי 24/7</li>
+                    </ul>
+                    
+                    <a href="contact.html" class="btn-package">בחירה בחבילה</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="py-32 bg-charcoal">
+        <div class="container">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+                    השוואת חבילות
+                </h2>
+                <p class="text-xl text-gray-300 font-inter">
+                    טבלה מפורטת להשוואה בין החבילות השונות
+                </p>
+            </div>
+
+            <div class="comparison-table max-w-6xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                <div class="comparison-header">
+                    <div class="comparison-row">
+                        <div class="comparison-cell font-serif text-xl">שירות</div>
+                        <div class="comparison-cell font-bold">Classic</div>
+                        <div class="comparison-cell font-bold">Premium</div>
+                        <div class="comparison-cell font-bold">Luxury</div>
+                        <div class="comparison-cell font-bold">No Limits</div>
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell">אולם יוקרתי</div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell">קייטרינג שף</div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                    <div class="comparison-cell"><span class="check-mark">✓</span></div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell">צילום מקצועי</div>
+                    <div class="comparison-cell">סטילס</div>
+                    <div class="comparison-cell">סטילס + וידאו</div>
+                    <div class="comparison-cell">סטילס + וידאו</div>
+                    <div class="comparison-cell">צוות צילום מלא</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell">עיצוב האירוע</div>
+                    <div class="comparison-cell">בסיסי</div>
+                    <div class="comparison-cell">קונספט מלא</div>
+                    <div class="comparison-cell">תלת מימדי</div>
+                    <div class="comparison-cell">ללא הגבלה</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell">בידור</div>
+                    <div class="comparison-cell">DJ</div>
+                    <div class="comparison-cell">להקה</div>
+                    <div class="comparison-cell">להקה + הפתע
