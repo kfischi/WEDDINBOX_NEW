@@ -1,0 +1,48 @@
+# Redirects for Weddinbox Website
+
+# Main page redirects
+/home /index.html 200
+/homepage /index.html 200
+
+# Hebrew URL support
+/בית /index.html 200
+/אודות /about.html 200
+/חבילות /packages.html 200
+/גלריה /gallery.html 200
+/התהליך /process.html 200
+/ממליצים /testimonials.html 200
+/יצירת-קשר /contact.html 200
+
+# English aliases
+/about-us /about.html 200
+/services /packages.html 200
+/portfolio /gallery.html 200
+/work-process /process.html 200
+/reviews /testimonials.html 200
+/contact-us /contact.html 200
+
+# SEO-friendly URLs
+/wedding-packages /packages.html 200
+/luxury-events /packages.html 200
+/event-planning /process.html 200
+/wedding-gallery /gallery.html 200
+/client-testimonials /testimonials.html 200
+/get-quote /contact.html 200
+
+# Social media redirects
+/instagram https://instagram.com/weddinbox_events 301
+/facebook https://facebook.com/weddinbox.events 301
+/whatsapp https://wa.me/972501234567 301
+
+# Contact redirects
+/call tel:+972501234567 301
+/email mailto:info@weddinbox.co.il 301
+/phone tel:+972501234567 301
+
+# Legacy URLs (if migrating from old site)
+/old-gallery /gallery.html 301
+/old-packages /packages.html 301
+/old-about /about.html 301
+
+# 404 fallback - redirect to home page
+/* /index.html 404
